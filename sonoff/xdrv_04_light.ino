@@ -112,6 +112,11 @@ uint8_t light_fixed_color_index = 1;
 
 unsigned long strip_timer_counter = 0;    // Bars and Gradient
 
+// TUYA moved from within #ifdef USE_ARILUX_RF
+boolean tuya_hardware_flag = false;
+boolean tuya_hardware_synced = true;
+uint8_t tuya_hardware_value = 0;
+
 #ifdef USE_ARILUX_RF
 /*********************************************************************************************\
  * Arilux LC11 Rf support stripped from RCSwitch library
@@ -1230,6 +1235,7 @@ boolean LightCommand()
     else if ('-' == option) {
       XdrvMailbox.payload = (Settings.light_dimmer < 11) ? 1 : Settings.light_dimmer - 10;
     }
+    // ******* Start TUYA Dimmer Modifications
     if (XdrvMailbox.payload & 0x0100){
       tuya_hardware_flag = true;
       XdrvMailbox.payload &= 0xFF;
@@ -1237,46 +1243,45 @@ boolean LightCommand()
       if(abs(tuya_hardware_value - Settings.light_dimmer) <= 3) {
         tuya_hardware_synced = true;
       }
-    } else {
+    } 
+    else {
       tuya_hardware_flag = false;
     }
+
     snprintf_P(log_data, sizeof(log_data), "payload %d, flag %d, synced %d", XdrvMailbox.payload, tuya_hardware_flag, tuya_hardware_synced);
     AddLog(LOG_LEVEL_DEBUG);
-    //if(!TUYA_DIMMER == Settings.module || tuya_hardware_synced || !tuya_hardware_flag) {
-      if ((XdrvMailbox.payload >= 0) && (XdrvMailbox.payload <= 100)) {
-        Settings.light_dimmer = XdrvMailbox.payload;
-        if (TUYA_DIMMER == Settings.module && (!tuya_hardware_flag)) {
-          snprintf_P(log_data, sizeof(log_data), "Setting MCU-Dimmer to %d", Settings.light_dimmer);
-          AddLog(LOG_LEVEL_DEBUG);
-          LightSetDimmer(Settings.light_dimmer);
-          if(light_current_color[0] < 2) light_current_color[0] = 2;
-          tuya_hardware_synced = false;
 
-          //for (int i=0; i < 2; ++i) { // Send command twice
-            Serial.write(0x55); // header 55AA
-            Serial.write(0xAA);
-            Serial.write(0x00); // version 00
-            Serial.write(0x06); // command 06 - send order
-            Serial.write(0x00);
-            Serial.write(0x08); // following data length 0x05
-            Serial.write(0x02); // id
-            Serial.write(0x02); // type = value
-            Serial.write(0x00); // length
-            Serial.write(0x04); // length
-            Serial.write(0x00);
-            Serial.write(0x00);
-            Serial.write(0x00);
-            Serial.write(light_current_color[0]); // status
-            Serial.write((0x115 + light_current_color[0]) % 256); // checksum:sum of all bytes in packet mod 256
-            Serial.flush();
-          //}
-        }
-        light_update = 1;
-        coldim = true;
-      } else {
-        snprintf_P(mqtt_data, sizeof(mqtt_data), S_JSON_COMMAND_NVALUE, command, Settings.light_dimmer);
+    if ((XdrvMailbox.payload >= 0) && (XdrvMailbox.payload <= 100)) {
+      Settings.light_dimmer = XdrvMailbox.payload;
+      if (TUYA_DIMMER == Settings.module && (!tuya_hardware_flag)) {
+        snprintf_P(log_data, sizeof(log_data), "Setting MCU-Dimmer to %d", Settings.light_dimmer);
+        AddLog(LOG_LEVEL_DEBUG);
+        LightSetDimmer(Settings.light_dimmer);
+        if(light_current_color[0] < 2) light_current_color[0] = 2;
+        tuya_hardware_synced = false;
+        Serial.write(0x55); // Tuya header 55AA
+        Serial.write(0xAA);
+        Serial.write(0x00); // version 00
+        Serial.write(0x06); // command 06 - send order
+        Serial.write(0x00);
+        Serial.write(0x08); // following data length 0x05
+        Serial.write(0x02); // id
+        Serial.write(0x02); // type = value
+        Serial.write(0x00); // length
+        Serial.write(0x04); // length
+        Serial.write(0x00);
+        Serial.write(0x00);
+        Serial.write(0x00);
+        Serial.write(light_current_color[0]); // status
+        Serial.write((0x115 + light_current_color[0]) % 256); // checksum:sum of all bytes in packet mod 256
+        Serial.flush();
       }
-    //}
+      light_update = 1;
+      coldim = true;
+    } else {
+      snprintf_P(mqtt_data, sizeof(mqtt_data), S_JSON_COMMAND_NVALUE, command, Settings.light_dimmer);
+    }
+    // ******* End TUYA Dimmer Modifications
   }
   else if (CMND_LEDTABLE == command_code) {
     if ((XdrvMailbox.payload >= 0) && (XdrvMailbox.payload <= 2)) {
