@@ -4,16 +4,15 @@ Alternative firmware for _ESP8266 based devices_ like [iTead](https://www.itead.
 
 [![GitHub version](https://img.shields.io/github/release/arendst/Sonoff-Tasmota.svg)](https://github.com/arendst/Sonoff-Tasmota/releases/latest)
 [![GitHub download](https://img.shields.io/github/downloads/arendst/Sonoff-Tasmota/total.svg)](https://github.com/arendst/Sonoff-Tasmota/releases/latest)
-[![License](https://img.shields.io/github/license/arendst/Sonoff-Tasmota.svg)](https://github.com/arendst/Sonoff-Tasmota/blob/development/LICENSE.txt)
+[![License](https://img.shields.io/github/license/arendst/Sonoff-Tasmota.svg)](https://github.com/arendst/Sonoff-Tasmota/blob/master/LICENSE.txt)
 
 If you like **Sonoff-Tasmota**, give it a star, or fork it and contribute!
+
 [![GitHub stars](https://img.shields.io/github/stars/arendst/Sonoff-Tasmota.svg?style=social&label=Star)](https://github.com/arendst/Sonoff-Tasmota/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/arendst/Sonoff-Tasmota.svg?style=social&label=Fork)](https://github.com/arendst/Sonoff-Tasmota/network)
+[![donate](https://img.shields.io/badge/donate-PayPal-blue.svg)](https://paypal.me/tasmota)
 
-### Development
-[![Build Status](https://img.shields.io/travis/arendst/Sonoff-Tasmota.svg)](https://travis-ci.org/arendst/Sonoff-Tasmota)
-
-Current version is **6.0.0a** - See [sonoff/_releasenotes.ino](https://github.com/arendst/Sonoff-Tasmota/blob/development/sonoff/_releasenotes.ino) for change information.
+See [RELEASENOTES.md](https://github.com/arendst/Sonoff-Tasmota/blob/master/RELEASENOTES.md) for release information
 
 ### Disclaimer
 :warning: **DANGER OF ELECTROCUTION** :warning:
@@ -37,10 +36,20 @@ If you want to compile Sonoff-Tasmota yourself keep in mind the following:
 - Once uploaded select module using the configuration webpage or the commands ```Modules``` and ```Module```.
 - After reboot select config menu again or use commands ```GPIOs``` and ```GPIO``` to change GPIO with desired sensor.
 
+### Migration Information
+See [wiki migration path](https://github.com/arendst/Sonoff-Tasmota/wiki/Upgrade#migration-path) for instructions how to migrate to a major version. Pay attention to the following version breaks due to dynamic settings updates:
+
+1. Migrate to **Sonoff-Tasmota 3.9.x**
+2. Migrate to **Sonoff-Tasmota 4.x**
+3. Migrate to **Sonoff-Tasmota 5.14**
+4. Migrate to **Sonoff-Tasmota 6.x**
+
+### Support Information
 <img src="https://github.com/arendst/arendst.github.io/blob/master/media/sonoffbasic.jpg" width="250" align="right" />
 
 See [Wiki](https://github.com/arendst/Sonoff-Tasmota/wiki) for more information.<br />
-See [Community](https://groups.google.com/d/forum/sonoffusers) for forum and more user experience.
+See [Community](https://groups.google.com/d/forum/sonoffusers) for forum.<br />
+See [Chat](https://discord.gg/Ks2Kzd4) for more user experience.
 
 The following devices are supported:
 - [iTead Sonoff Basic](https://www.itead.cc/smart-home/sonoff-wifi-wireless-switch-1.html)
@@ -52,8 +61,9 @@ The following devices are supported:
 - [iTead Sonoff Pow R2 with Energy Monitoring](https://www.itead.cc/sonoff-pow-r2.html)
 - [iTead Sonoff 4CH (R2)](https://www.itead.cc/smart-home/sonoff-4ch.html)
 - [iTead Sonoff 4CH Pro (R2)](https://www.itead.cc/smart-home/sonoff-4ch-pro.html)
-- [iTead S20 Smart Socket](https://www.itead.cc/smart-socket.html)
+- [iTead Sonoff S20 Smart Socket](https://www.itead.cc/smart-socket.html)
 - [Sonoff S22 Smart Socket](https://github.com/arendst/Sonoff-Tasmota/issues/627)
+- [iTead Sonoff S26 Smart Socket](https://www.itead.cc/sonoff-s26-wifi-smart-plug.html)
 - [iTead Sonoff S31 Smart Socket with Energy Monitoring](https://www.itead.cc/sonoff-s31.html)
 - [iTead Slampher](https://www.itead.cc/slampher.html)
 - [iTead Sonoff Touch](https://www.itead.cc/sonoff-touch.html)
@@ -62,6 +72,7 @@ The following devices are supported:
 - [iTead Sonoff Led](https://www.itead.cc/sonoff-led.html)<img src="https://github.com/arendst/arendst.github.io/blob/master/media/sonoff4chpror2.jpg" height="250" align="right" />
 - [iTead Sonoff BN-SZ01 Ceiling Led](https://www.itead.cc/bn-sz01.html)
 - [iTead Sonoff B1](https://www.itead.cc/sonoff-b1.html)
+- [iTead Sonoff iFan02](https://www.itead.cc/sonoff-ifan02-wifi-smart-ceiling-fan-with-light.html)
 - [iTead Sonoff RF Bridge 433](https://www.itead.cc/sonoff-rf-bridge-433.html)
 - [iTead Sonoff Dev](https://www.itead.cc/sonoff-dev.html)
 - [iTead 1 Channel Switch 5V / 12V](https://www.itead.cc/smart-home/inching-self-locking-wifi-wireless-switch.html)
@@ -72,77 +83,9 @@ The following devices are supported:
 - [MagicHome PWM LED controller](https://github.com/arendst/Sonoff-Tasmota/wiki/MagicHome-LED-strip-controller)
 - AriLux AL-LC01, AL-LC06 and AL-LC11 PWM LED controller
 - [Supla device - Espablo-inCan mod. for electrical Installation box](https://forum.supla.org/viewtopic.php?f=33&t=2188)
+- [BlitzWolf BW-SHP2 Smart Socket with Energy Monitoring](https://www.banggood.com/BlitzWolf-BW-SHP2-Smart-WIFI-Socket-EU-Plug-220V-16A-Work-with-Amazon-Alexa-Google-Assistant-p-1292899.html)
 - [Luani HVIO board](https://luani.de/projekte/esp8266-hvio/)
 - Wemos D1 mini, NodeMcu and Ledunia
-
-### Firmware Release Information
-Different firmware images are released based on Features and Sensors selection guided by code and memory usage.
-
-- The Minimal version allows intermediate OTA uploads to support larger versions and does NOT change any persistent parameter.
-- The Classic version allows single OTA uploads as did the previous Sonoff-Tasmota versions.
-
-#### Available Features and Sensors
-
-| Feature or Sensor              | sonoff | classic | minimal | knx | allsensors |
-|--------------------------------|--------|---------|---------|-----|------------|
-| MY_LANGUAGE en-GB              | x | x | x | x | x |
-| MQTT_LIBRARY_TYPE PUBSUBCLIENT | x | x | x | x | x |
-| USE_DOMOTICZ                   | x | x | - | x | x |
-| USE_HOME_ASSISTANT             | x | x | - | x | x |
-| USE_MQTT_TLS                   | - | - | - | - | - |
-| USE_KNX                        | - | - | - | x | - |
-| USE_WEBSERVER                  | x | x | x | x | x |
-| USE_EMULATION                  | x | x | - | - | x |
-| USE_DISCOVERY                  | x | x | - | x | x |
-| WEBSERVER_ADVERTISE            | x | x | - | x | x |
-| MQTT_HOST_DISCOVERY            | x | x | - | x | x |
-| USE_TIMERS                     | x | - | - | x | x |
-| USE_TIMERS_WEB                 | x | - | - | x | x |
-| USE_SUNRISE                    | x | - | - | x | x |
-| USE_RULES                      | x | - | - | x | x |
-|                                |   |   |   |   |   |
-| USE_ADC_VCC                    | x | x | x | x | x |
-| USE_DS18B20                    | x | x | - | x | - |
-| USE_DS18x20                    | - | - | - | - | x |
-| USE_DS18x20_LEGACY             | - | - | - | - | - |
-| USE_I2C                        | x | x | - | x | x |
-| USE_SHT                        | x | x | - | x | x |
-| USE_SHT3X                      | x | x | - | x | x |
-| USE_HTU                        | x | x | - | x | x |
-| USE_BMP                        | x | x | - | x | x |
-| USE_BME680                     | - | - | - | - | x |
-| USE_SGP30                      | x | - | - | x | x |
-| USE_BH1750                     | x | x | - | x | x |
-| USE_VEML6070                   | - | - | - | - | x |
-| USE_TSL2561                    | - | - | - | - | x |
-| USE_SI1145                     | - | - | - | - | x |
-| USE_ADS1115                    | - | - | - | - | x |
-| USE_ADS1115_I2CDEV             | - | - | - | - | - |
-| USE_INA219                     | - | - | - | - | x |
-| USE_MGS                        | - | - | - | - | x |
-| USE_SPI                        | - | - | - | - | - |
-| USE_MHZ19                      | x | x | - | x | x |
-| USE_SENSEAIR                   | x | x | - | x | x |
-| USE_PMS5003                    | x | x | - | x | x |
-| USE_NOVA_SDS                   | x | - | - | x | x |
-| USE_PZEM004T                   | x | x | - | x | x |
-| USE_SERIAL_BRIDGE              | x | - | - | x | x |
-| USE_SDM120                     | - | - | - | - | x |
-| USE_IR_REMOTE                  | x | x | - | x | x |
-| USE_IR_HVAC                    | - | - | - | - | x |
-| USE_IR_RECEIVE                 | x | - | - | x | x |
-| USE_WS2812                     | x | x | - | x | x |
-| USE_WS2812_DMA                 | - | - | - | - | - |
-| USE_ARILUX_RF                  | x | x | - | x | x |
-| USE_SR04                       | x | - | - | x | x |
-
-#### Typical File Size
-
-| ESP/Arduino library version | sonoff | classic | minimal | knx  | allsensors |
-|-----------------------------|--------|---------|---------|------|------------|
-| ESP/Arduino lib v2.3.0      | 529k   | 490k    | 429k    | 538k | 554k       |
-| ESP/Arduino lib v2.4.0      | 534k   | 498k    | 436k    | 542k | 558k       |
-| ESP/Arduino lib v2.4.1      | 536k   | 501k    | 439k    | 545k | 560k       |
 
 ### Contribute
 You can contribute to Sonoff-Tasmota by
@@ -157,13 +100,15 @@ You can contribute to Sonoff-Tasmota by
 #### Libraries Used
 Libraries used with Sonoff-Tasmota are:
 - [ESP8266 core for Arduino](https://github.com/esp8266/Arduino)
-- [Adafruit BME680](https://github.com/adafruit/Adafruit_BME680)
-- [Adafruit Sensor](https://github.com/adafruit/Adafruit_Sensor)
+- [Adafruit CCS811](https://github.com/adafruit/Adafruit_CCS811)
 - [Adafruit SGP30](https://github.com/adafruit/Adafruit_SGP30)
 - [ArduinoJson](https://arduinojson.org/)
+- [Bosch BME680](https://github.com/BoschSensortec/BME680_driver)
+- [C2 Programmer](http://app.cear.ufpb.br/~lucas.hartmann/tag/efm8bb1/)
 - [Esp8266MqttClient](https://github.com/tuanpmt/ESP8266MQTTClient)
 - [esp-knx-ip](https://github.com/envy/esp-knx-ip)
 - [esp-mqtt-arduino](https://github.com/i-n-g-o/esp-mqtt-arduino)
+- [ESPAsyncUDP](https://github.com/me-no-dev/ESPAsyncUDP)
 - [I2Cdevlib](https://github.com/jrowberg/i2cdevlib)
 - [IRremoteEsp8266](https://github.com/markszabo/IRremoteESP8266)
 - [JobaTsl2561](https://github.com/joba-1/Joba_Tsl2561)
